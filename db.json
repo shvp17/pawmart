@@ -1,0 +1,31 @@
+{
+  "dogProducts": [
+    { "id": 1, "name": "Chicken Recipe for Dogs", "category": "food", "price": 35, "img": "images/dog1.jpg" },
+    { "id": 2, "name": "Duck Recipe for Dogs", "category": "food", "price": 35, "img": "images/dog2.jpg" },
+    { "id": 3, "name": "Fish Recipe for Dogs", "category": "food", "price": 35, "img": "images/dog3.jpg" },
+    { "id": 4, "name": "Beef Recipe for Dogs", "category": "food", "price": 35, "img": "images/dog4.jpg" },
+    { "id": 5, "name": "Chicken Liver", "category": "food", "price": 45, "img": "images/dog5.jpg" },
+    { "id": 6, "name": "Duck Liver", "category": "food", "price": 45, "img": "images/dog6.jpg" },
+    { "id": 7, "name": "Beef Liver", "category": "food", "price": 45, "img": "images/dog7.jpg" },
+    { "id": 8, "name": "Chicken Gizzards", "category": "food", "price": 50, "img": "images/dog8.jpg" },
+    { "id": 9, "name": "Beef Nuggets", "category": "food", "price": 50, "img": "images/dog9.jpg" },
+    { "id": 10, "name": "Interactive Dog Toy With Large Ring And Ball In Blue", "category": "toys", "price": 15, "img": "images/dog10.jpg" },
+    { "id": 11, "name": "Interactive Dog Toy With Large Ring And Ball In Pink", "category": "toys", "price": 15, "img": "images/dog11.jpg" },
+    { "id": 12, "name": "Interactive Dog Toy With Large Ring And Ball In Green", "category": "toys", "price": 15, "img": "images/dog12.jpg" },
+    { "id": 13, "name": "Donut Dog Chew Toys", "category": "toys", "price": 12, "img": "images/dog13.jpg" },
+    { "id": 14, "name": "Coffee Wood Dog Toy", "category": "toys", "price": 10, "img": "images/dog14.jpg" },
+    { "id": 15, "name": "Dog All Purpose Trimming Scissor", "category": "grooming", "price": 18, "img": "images/dog15.jpg" },
+    { "id": 16, "name": "Dog Bristle Brush", "category": "grooming", "price": 25, "img": "images/dog16.jpg" },
+    { "id": 17, "name": "Dog Combo Brush", "category": "grooming", "price": 25, "img": "images/dog17.jpg" },
+    { "id": 18, "name": "Dog Deshedder Undercoat Rake Combo", "category": "grooming", "price": 25, "img": "images/dog18.jpg" },
+    { "id": 19, "name": "Dog Flea Comb", "category": "grooming", "price": 25, "img": "images/dog19.jpg" },
+    { "id": 20, "name": "Dog Nail Clipper", "category": "grooming", "price": 15, "img": "images/dog20.jpg" },
+    { "id": 21, "name": "Dog Nail Trimmer", "category": "grooming", "price": 15, "img": "images/dog21.jpg" },
+    { "id": 22, "name": "Grooming Shield", "category": "grooming", "price": 8, "img": "images/dog22.jpg" },
+    { "id": 23, "name": "Dogit 2in1 Durable Bowl White 350ml", "category": "accessories", "price": 28, "img": "images/dog23.jpg" },
+    { "id": 24, "name": "Dogit 2in1 Durable Bowl Black 350ml", "category": "accessories", "price": 28, "img": "images/dog24.jpg" },
+    { "id": 25, "name": "Dog Adjustable Collar Black 36cm", "category": "accessories", "price": 10, "img": "images/dog25.jpg" },
+    { "id": 26, "name": "Dog Adjustable Collar Tangerine 36cm", "category": "accessories", "price": 10, "img": "images/dog26.jpg" },
+    { "id": 27, "name": "Dog Adjustable Collar Purple 36cm", "category": "accessories", "price": 10, "img": "images/dog27.jpg" }
+  ]
+}
