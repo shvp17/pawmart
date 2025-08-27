@@ -8,8 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="pawmart.css">
-    <!-- 在现有的 <script> 标签之前添加 -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         /* Auth Container */
         .auth-container {
@@ -104,7 +103,7 @@
             background-color: #4c4c4c;
         }
 
-        /* 密码输入容器样式 */
+        /* Password input container styles */
         .password-input-container {
             position: relative;
         }
@@ -196,7 +195,7 @@
             display: block;
         }
 
-        /* Google登录按钮样式 */
+        /* Google login button styles */
         .divider {
             display: flex;
             align-items: center;
@@ -229,7 +228,7 @@
             margin-left: .5em;
         }
 
-        /* 调整Google按钮容器 */
+        /* Adjust Google button container */
         .g_id_signin {
             margin: 0 auto;
             display: flex;
@@ -596,19 +595,19 @@
             });
         });
 
-        // Google登录回调处理
+        // Google login callback handling
         function handleGoogleSignIn(response) {
-            // 解码JWT令牌获取用户信息
+            // Decode JWT token to get user information
             const responsePayload = parseJwt(response.credential);
 
-            console.log("Google登录响应:", responsePayload);
+            console.log("Google login response:", responsePayload);
 
-            // 显示加载状态
+            // Show loading state
             $('.auth-btn')
                 .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing in...')
                 .prop('disabled', true);
 
-            // 检查用户是否已存在
+            // Check if user already exists
             let users = JSON.parse(localStorage.getItem("pawMartUsers")) || [];
             const existingUser = users.find(u => u.email === responsePayload.email);
 
@@ -617,12 +616,12 @@
                         $('.auth-btn').html('Create Account').prop('disabled', false);
                         return;
             } else {
-                // 新用户，创建账户
+                // New user, create account
                 const userData = {
                     firstName: responsePayload.given_name,
                     lastName: responsePayload.family_name,
                     email: responsePayload.email,
-                    password: "google_oauth", // 特殊标记表示通过Google登录
+                    password: "google_oauth", // Special marker indicating Google login
                     picture: responsePayload.picture
                 };
 
@@ -636,7 +635,7 @@
             }
         }
 
-        // 解析JWT令牌的辅助函数
+        // Decode JWT token to get user information
         function parseJwt(token) {
             try {
                 return JSON.parse(atob(token.split('.')[1]));

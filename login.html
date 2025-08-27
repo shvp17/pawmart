@@ -167,7 +167,7 @@
             color: #ccc;
         }
 
-        /* Google登录按钮样式 */
+        /* Google login button styles */
         .divider {
             display: flex;
             align-items: center;
@@ -200,7 +200,7 @@
             margin-left: .5em;
         }
 
-        /* 调整Google按钮容器 */
+        /* Adjust Google button container */
         .g_id_signin {
             margin: 0 auto;
             display: flex;
@@ -475,36 +475,36 @@
             window.location.href = "index.html";
         });
 
-        // Google登录回调处理
+        // Google login callback handling
         function handleGoogleSignIn(response) {
-            // 解码JWT令牌获取用户信息
+            // Decode JWT token to get user information
             const responsePayload = parseJwt(response.credential);
 
-            console.log("Google登录响应:", responsePayload);
+            console.log("Google login response:", responsePayload);
 
-            // 显示加载状态
+            // Show loading state
             $('.auth-btn')
                 .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing in...')
                 .prop('disabled', true);
 
-            // 检查用户是否已存在
+            // Check if user already exists
             let users = JSON.parse(localStorage.getItem("pawMartUsers")) || [];
             const existingUser = users.find(u => u.email === responsePayload.email);
 
             if (existingUser) {
-                // 用户已存在，直接登录
+                // User already exists, log in directly
                 localStorage.setItem("currentUser", JSON.stringify(existingUser));
                 localStorage.setItem("isLoggedIn", "true");
 
                 alert(`✅ Welcome back, ${existingUser.firstName || existingUser.name}!`);
                 window.location.href = "index.html";
             } else {
-                // 新用户，创建账户
+                // New user, create account
                 const userData = {
                     firstName: responsePayload.given_name,
                     lastName: responsePayload.family_name,
                     email: responsePayload.email,
-                    password: "google_oauth", // 特殊标记表示通过Google登录
+                    password: "google_oauth", // Special marker indicating Google login
                     picture: responsePayload.picture
                 };
 
@@ -518,7 +518,7 @@
             }
         }
 
-        // 解析JWT令牌的辅助函数
+        // Decode JWT token to get user information
         function parseJwt(token) {
             try {
                 return JSON.parse(atob(token.split('.')[1]));

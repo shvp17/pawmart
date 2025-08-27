@@ -257,6 +257,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/js/social-share-kit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
   <script>
     //     const dogProducts = [
@@ -317,13 +318,13 @@
         url += `?category=${filter}`;
       }
 
-     $.get(url, function (data) {
-    $.each(data, function (_, product) {
-        const productUrl = window.location.href;
-        const productTitle = product.name + ' - PawMart';
-        const whatsappText = encodeURIComponent(`Check out ${product.name} at PawMart: ${window.location.href}`);
-        
-        const card = `
+      $.get(url, function (data) {
+        $.each(data, function (_, product) {
+          const productUrl = window.location.href;
+          const productTitle = product.name + ' - PawMart';
+          const whatsappText = encodeURIComponent(`Check out ${product.name} at PawMart: ${window.location.href}`);
+
+          const card = `
         <div class="card show">
           <img src="${product.img}" alt="${product.name}">
           <h5>${product.name}</h5>
@@ -341,8 +342,8 @@
             <a href="#" class="ssk ssk-email"></a>
           </div>
         </div>`;
-        $("#product-list").append(card);
-    });
+          $("#product-list").append(card);
+        });
         if (typeof SocialShareKit !== 'undefined') {
           SocialShareKit.init();
         }
