@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawMart - Pet Supplies & Treats</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="login_cart.js"></script>
+    <style>
+        /* Hero Section with Parallax Effect */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/pets3.jpg');
+            background-position: right bottom;
+            background-size: cover;
+            /* animation: float 20s ease-in-out infinite; */
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-cta {
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Product Sections */
+        .product-sections {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--brown);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+            border-radius: 2px;
+        }
+
+        .product-category-nav {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+            padding: 10px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-orange);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 151, 80, 0.3);
+        }
+
+        /* Featured Products */
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid #f8d7c2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 300px;
+            background: linear-gradient(45deg, #fff5eb, #ffd8c9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #5a3921;
+            font-size: 1.1rem;
+            min-height: 2.8rem;
+        }
+
+        .product-price {
+            color: #f09650;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-rating {
+            color: #f8b888;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info .btn {
+            margin-top: auto;
+            align-self: center;
+            background: linear-gradient(45deg, #f09650, #f8b888);
+            border: none;
+            width: 100%;
+        }
+
+        .product-info .btn:hover {
+            background: linear-gradient(45deg, #e08540, #f0a068);
+        }
+
+        /* CTA Section with Parallax Effect */
+        .cta-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/pets1.jpg');
+            background-position: center 35%;
+            background-size: cover;
+            /* animation: float 20s ease-in-out infinite; */
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--brown);
+            margin-bottom: 3rem;
+        }
+
+        .contact-section .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-section .card-body {
+            padding: 2rem;
+        }
+
+        .contact-section i {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section h4 {
+            color: var(--brown);
+            font-weight: bold;
+        }
+
+        .contact-section hr {
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-orange);
+            opacity: 1;
+        }
+
+        /* Get Started Button Style */
+        .get-started-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-orange), var(--light-orange));
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(240, 151, 80, 0.3);
+        }
+
+        .get-started-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(240, 151, 80, 0.4);
+            color: white;
+        }
+
+        .get-started-btn span {
+            position: absolute;
+            background: white;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: animate 1s linear infinite;
+        }
+
+        body.dark-mode {
+            background-color: #151515;
+            color: #f1f1f1;
+        }
+
+
+
+        /* Hero + CTA overlays keep images but brighten text */
+        body.dark-mode .hero-section,
+        body.dark-mode .cta-section {
+            color: #fff;
+        }
+
+        body.dark-mode .hero-title,
+        body.dark-mode .hero-subtitle {
+            text-shadow: none;
+        }
+
+        /* Product sections background */
+        body.dark-mode .product-sections {
+            background-color: #111 !important;
+        }
+
+        body.dark-mode .product-sections:nth-of-type(2) {
+            background-color: #151515 !important;
+        }
+
+        /* Cards */
+        body.dark-mode .product-card {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #eee;
+        }
+
+        body.dark-mode .product-title {
+            color: #fff;
+        }
+
+        body.dark-mode .product-price {
+            color: var(--light-orange);
+        }
+
+        body.dark-mode .product-rating {
+            color: #c58f6a;
+        }
+
+        /* Category buttons */
+        body.dark-mode .category-btn {
+            border-color: var(--light-orange);
+            color: var(--light-orange);
+        }
+
+        body.dark-mode .category-btn:hover,
+        body.dark-mode .category-btn.active {
+            background: var(--light-orange);
+            color: #111;
+        }
+
+        /* Section titles + divider */
+        body.dark-mode .section-title {
+            color: #fff;
+        }
+
+        body.dark-mode .section-title::after {
+            background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+        }
+
+        /* Contact / Pet-care cards (if shown) */
+        body.dark-mode .contact-section {
+            background: #111;
+        }
+
+        body.dark-mode .contact-section .card {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #eee;
+        }
+
+        body.dark-mode .pet-care-section {
+            background: #111;
+        }
+
+        body.dark-mode .pet-care-card {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #eee;
+        }
+
+        @keyframes animate {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+
+            100% {
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .category-card {
+                margin-bottom: 1rem;
+            }
+
+            .top-bar .col-md-6.text-end {
+                text-align: center !important;
+                margin-top: 5px;
+            }
+
+            .hero-section,
+            .cta-section {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button id="accountLink" class="btn btn-outline-light">
+                            Account
+                        </button>
+                        <ul id="accountDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Parallax Effect -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">Everything Your Pet Needs</h1>
+                    <p class="hero-subtitle">Premium pet supplies, treats, and accessories for your beloved companions.
+                        Quality products at affordable prices.</p>
+                    <div class="hero-cta">
+                        <button class="get-started-btn me-3" onclick="scrollToProducts()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Shop Now
+                        </button>
+                        <button class="btn btn-outline-light" onclick="learnMore()">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div style="font-size: 15rem; color: rgba(255,255,255,0.1);">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="product-sections">
+        <div class="container">
+            <h2 class="section-title">Best Sellers</h2>
+            <div class="product-category-nav">
+                <button class="category-btn active" onclick="filterProducts('bestsellers', 'all')">All</button>
+                <button class="category-btn" onclick="filterProducts('bestsellers', 'dog')"><i class="fas fa-dog"></i>
+                    Dog</button>
+                <button class="category-btn" onclick="filterProducts('bestsellers', 'cat')"><i class="fas fa-cat"></i>
+                    Cat</button>
+                <button class="category-btn" onclick="filterProducts('bestsellers', 'fishnbird')"><i
+                        class="fas fa-dove"></i>
+                    Fish & Bird</button>
+                <button class="category-btn" onclick="filterProducts('bestsellers', 'smallpet')"><i
+                        class="fas fa-paw"></i> Small Pets</button>
+            </div>
+            <div class="row" id="bestsellers-container">
+                <!-- Best sellers will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Products Section -->
+    <section class="product-sections" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Latest Products</h2>
+            <div class="product-category-nav">
+                <button class="category-btn active" onclick="filterProducts('latest', 'all')">All</button>
+                <button class="category-btn" onclick="filterProducts('latest', 'dog')"><i class="fas fa-dog"></i>
+                    Dog</button>
+                <button class="category-btn" onclick="filterProducts('latest', 'cat')"><i class="fas fa-cat"></i>
+                    Cat</button>
+                <button class="category-btn" onclick="filterProducts('latest', 'fishnbird')"><i class="fas fa-dove"></i>
+                    Fish & Bird</button>
+                <button class="category-btn" onclick="filterProducts('latest', 'smallpet')"><i class="fas fa-paw"></i>
+                    Small Pets</button>
+            </div>
+            <div class="row" id="latest-container">
+                <!-- Latest products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action with Parallax Effect -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Join Our Pet Community</h2>
+            <p class="cta-subtitle">Get exclusive deals, pet care tips, and early access to new products</p>
+            <button class="get-started-btn" onclick="location.href='register.html'">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Subscribe Now
+            </button>
+        </div>
+    </section>
+
+    <!-- ====================== Contact ====================== -->
+    <!-- <section class="contact-section">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-black mb-5">Reach Out To Us</h2>
+            <div class="row gx-4 gx-lg-5"> -->
+    <!-- Address -->
+    <!-- <div class="col-md-4 mb-3 mb-md-0 contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked-alt mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black-50">Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    <!-- Email -->
+    <!-- <div class="col-md-4 mb-3 mb-md-0 contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black">
+                                <a href="mailto:info@pawmart.com">info@pawmart.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    <!-- Phone Number -->
+    <!-- <div class="col-md-4 mb-3 mb-md-0 whatsapp-contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fa-brands fa-whatsapp mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Whatsapp Us</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black-50">+60 4-733 8800</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- ====================== Pet Care Section ====================== -->
+    <section class="pet-care-section">
+        <div class="container">
+            <h2 class="section-title">Pet Care Resources</h2>
+            <p class="text-center mb-5">Learn how to best care for your furry friends with our expert tips and guides
+            </p>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="pet-care-card">
+                        <div class="pet-care-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Training Guides</h4>
+                        <p>Learn effective techniques for training your pets, from basic obedience to advanced tricks.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="pet-care-card">
+                        <div class="pet-care-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>Health & Wellness</h4>
+                        <p>Keep your pets healthy with our nutrition and healthcare advice from veterinary experts.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="pet-care-card">
+                        <div class="pet-care-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>Habitat Setup</h4>
+                        <p>Create the perfect environment for your pets with our habitat and enclosure guides.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="pet-care-card">
+                        <div class="pet-care-icon">
+                            <i class="fas fa-first-aid"></i>
+                        </div>
+                        <h4>Emergency Care</h4>
+                        <p>Be prepared for any situation with our first aid and emergency care resources.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="petcare.html" class="get-started-btn">
+                    Explore All Pet Care Resources
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved
+                        pets.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+                    <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+                    <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample product data (without best seller/new tags)
+        const bestSellers = [
+            { id: 6, name: "Duck Liver", category: "dog", price: 45, img: "images/dog6.jpg" },
+            { id: 7, name: "Beef Liver", category: "dog", price: 45, img: "images/dog7.jpg" },
+            { id: 69, name: "Cat Triple Finger Massage Brush", category: "cat", price: 25, img: "images/cat17.jpg" },
+            { id: 70, name: "Cat Bristle Slicker Brush", category: "cat", price: 25, img: "images/cat18.jpg" },
+            { id: 31, name: "Cuttlefish Bone for Birds 250g", category: "fishnbird", price: 30, img: "images/fb4.jpeg" },
+            { id: 32, name: "Bird Seed Mix 1kg", category: "fishnbird", price: 6, img: "images/fb5.jpeg" },
+            { id: 100, name: "Ball Corn Leaf Chew Rabbit Toy", category: "smallpet", price: 4.20, img: "images/s19.jpeg" },
+            { id: 94, name: "Wooden Chew Sticks Pack of 100g", category: "smallpet", price: 10, img: "images/s13.jpeg" }
+        ];
+
+        const latestProducts = [
+            { id: 26, name: "Dog Adjustable Collar Tangerine 36cm", category: "dog", price: 10, img: "images/dog26.jpg" },
+            { id: 27, name: "Dog Adjustable Collar Purple 36cm", category: "dog", price: 10, img: "images/dog27.jpg" },
+            { id: 132, name: "Nail Clipper for Small Pets", category: "smallpet", price: 18, img: "images/s51.jpeg" },
+            { id: 133, name: "Wooden Chew Platform with Ladder", category: "smallpet", price: 10, img: "images/s52.jpeg" },
+            { id: 80, name: "Feeding Dish Double White 200ml X 2", category: "cat", price: 25, img: "images/cat28.jpg" },
+            { id: 81, name: "Feeding Dish Double Black 200ml X 2", category: "cat", price: 25, img: "images/cat29.jpg" },
+            { id: 51, name: "Bird Feeding Bowl", category: "fishnbird", price: 18, img: "images/fb24.jpeg" },
+            { id: 52, name: "Aquarium LED Lighting 28cm (white)", category: "fishnbird", price: 7.20, img: "images/fb25.jpeg" }
+        ];
+
+        // Initialize after page load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially display all products
+            filterProducts('bestsellers', 'all');
+            filterProducts('latest', 'all');
+
+            // Add active state handling for all category buttons
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active state from all buttons in the group
+                    const buttonGroup = this.closest('.product-category-nav');
+                    const groupButtons = buttonGroup.querySelectorAll('.category-btn');
+                    groupButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Add active state to the current button
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // Product filtering function
+        function filterProducts(section, category) {
+            const containerId = section === 'bestsellers' ? 'bestsellers-container' : 'latest-container';
+            const products = section === 'bestsellers' ? bestSellers : latestProducts;
+
+            // Filter products
+            const filteredProducts = category === 'all'
+                ? products
+                : products.filter(product => product.category === category);
+
+            // Display products
+            displayProducts(containerId, filteredProducts);
+        }
+
+        // Display products function
+        function displayProducts(containerId, products) {
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error(`Container with ID ${containerId} not found`);
+                return;
+            }
+
+            // Clear the container
+            container.innerHTML = '';
+
+            // Add product cards
+            products.forEach(product => {
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-title">${product.name}</h5>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="product-price">RM ${product.price.toFixed(2)}</p>
+                                <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += productCard;
+            });
+        }
+
+        // Add to cart function
+        function addToCart(productId) {
+            console.log(`Product ${productId} added to cart`);
+            alert('Product added to cart!');
+        }
+
+        //  Other utility functions
+        function scrollToProducts() {
+            document.querySelector('.product-sections').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function learnMore() {
+            window.location.href = 'about.html';
+        }
+
+        //Dark mode toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+                sessionStorage.setItem('darkMode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                sessionStorage.setItem('darkMode', 'false');
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PawMart Pet Supplies & Treats</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        /* Auth Container */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: url('images/login-light.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        body.dark-mode .auth-container {
+            background: url('images/login-dark.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--pale-orange);
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .auth-card {
+            background-color: var(--card-dark);
+            border-color: #555;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-icon {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .auth-title {
+            color: var(--brown);
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .auth-title {
+            color: var(--light-orange);
+        }
+
+        .auth-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        body.dark-mode .auth-subtitle {
+            color: #ccc;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border: 2px solid var(--pale-orange);
+            border-radius: 15px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #3c3c3c;
+            border-color: #555;
+            color: var(--dark-text);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 0.2rem rgba(240, 151, 80, 0.25);
+            background-color: white;
+        }
+
+        body.dark-mode .form-control:focus {
+            background-color: #4c4c4c;
+        }
+
+        .auth-btn {
+            background: linear-gradient(45deg, var(--primary-orange), var(--light-orange));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(240, 151, 80, 0.3);
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(240, 151, 80, 0.4);
+        }
+
+        .auth-btn:active {
+            transform: translateY(-1px);
+        }
+
+        body.dark-mode .auth-btn {
+            background: linear-gradient(45deg, var(--light-orange), var(--pale-orange));
+            color: #333;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .auth-link {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .auth-link:hover {
+            color: var(--brown);
+            text-decoration: underline;
+        }
+
+        body.dark-mode .auth-link {
+            color: var(--light-orange);
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #ccc;
+            opacity: 1;
+        }
+
+        body.dark-mode .form-check-label {
+            color: #ccc;
+        }
+
+        body.dark-mode .auth-footer p {
+            color: #ccc;
+        }
+
+        /* Google登录按钮样式 */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .divider {
+            color: #ccc;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        body.dark-mode .divider::before,
+        body.dark-mode .divider::after {
+            border-bottom: 1px solid #555;
+        }
+
+        .divider::before {
+            margin-right: .5em;
+        }
+
+        .divider::after {
+            margin-left: .5em;
+        }
+
+        /* 调整Google按钮容器 */
+        .g_id_signin {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .auth-card {
+                padding: 1.5rem 1rem;
+                margin: 0 10px;
+            }
+
+            .auth-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <button class="btn btn-outline-light">
+                        <i class="fas fa-user"></i> Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Auth Container -->
+    <div class="auth-container d-flex justify-content-center align-items-center">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon"><i class="fas fa-paw"></i></div>
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to your PawMart account</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                    <a href="#" class="float-end auth-link">Forgot Password?</a>
+                </div>
+                <button type="submit" class="auth-btn">Sign In</button>
+            </form>
+
+            <div class="auth-footer mt-4">
+                <div class="divider mb-3">
+                    <span>Or continue with</span>
+                </div>
+                <div id="g_id_onload"
+                    data-client_id="1026092295902-rj5s9h04jca0v54a5d2og2129suu810l.apps.googleusercontent.com"
+                    data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn"
+                    data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue"
+                    data-text="signin_with" data-size="large" data-logo_alignment="left" data-width="300">
+                </div>
+            </div>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="register.html" class="auth-link">Create one here</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved pets
+                        across Malaysia.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+                    <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+                    <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            checkDarkModePreference();
+        });
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+            sessionStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
+        }
+
+        function checkDarkModePreference() {
+            const darkModeSaved = sessionStorage.getItem('darkMode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            if (darkModeSaved === 'true') {
+                document.body.classList.add('dark-mode');
+                icon.className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // Cart redirection
+        function toggleCart() {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            if (!isLoggedIn) {
+                alert("Please login first!");
+                window.location.href = "login.html";
+                return;
+            }
+            window.location.href = "cart.html";
+        }
+
+        // Login logic (supports multiple users)
+        $('#loginForm').on('submit', function (e) {
+            e.preventDefault();
+
+            const email = $('#loginEmail').val().trim();
+            const password = $('#loginPassword').val().trim();
+            const rememberMe = $('#rememberMe').is(':checked');
+
+            if (!email || !password) {
+                alert('⚠️ Please fill in all fields');
+                return;
+            }
+
+            // Get user list
+            let users = JSON.parse(localStorage.getItem("pawMartUsers")) || [];
+
+            // Find user in array
+            const foundUser = users.find(u => u.email === email && u.password === password);
+
+            if (!foundUser) {
+                alert("❌ Invalid email or password. Please try again.");
+                return;
+            }
+
+            // Log in successfully
+            alert(`✅ Welcome back, ${foundUser.firstName}! Redirecting...`);
+
+            // Save current user
+            localStorage.setItem("currentUser", JSON.stringify(foundUser));
+
+            // Save login status
+            if (rememberMe) {
+                localStorage.setItem("isLoggedIn", "true");
+                sessionStorage.removeItem("isLoggedIn");
+            } else {
+
+                sessionStorage.setItem("isLoggedIn", "true");
+                localStorage.removeItem("isLoggedIn");
+            }
+            // Redirect to home page after login
+            window.location.href = "index.html";
+        });
+
+        // Google登录回调处理
+        function handleGoogleSignIn(response) {
+            // 解码JWT令牌获取用户信息
+            const responsePayload = parseJwt(response.credential);
+
+            console.log("Google登录响应:", responsePayload);
+
+            // 显示加载状态
+            $('.auth-btn')
+                .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing in...')
+                .prop('disabled', true);
+
+            // 检查用户是否已存在
+            let users = JSON.parse(localStorage.getItem("pawMartUsers")) || [];
+            const existingUser = users.find(u => u.email === responsePayload.email);
+
+            if (existingUser) {
+                // 用户已存在，直接登录
+                localStorage.setItem("currentUser", JSON.stringify(existingUser));
+                localStorage.setItem("isLoggedIn", "true");
+
+                alert(`✅ Welcome back, ${existingUser.firstName || existingUser.name}!`);
+                window.location.href = "index.html";
+            } else {
+                // 新用户，创建账户
+                const userData = {
+                    firstName: responsePayload.given_name,
+                    lastName: responsePayload.family_name,
+                    email: responsePayload.email,
+                    password: "google_oauth", // 特殊标记表示通过Google登录
+                    picture: responsePayload.picture
+                };
+
+                users.push(userData);
+                localStorage.setItem("pawMartUsers", JSON.stringify(users));
+                localStorage.setItem("currentUser", JSON.stringify(userData));
+                localStorage.setItem("isLoggedIn", "true");
+
+                alert(`🎉 Welcome to PawMart, ${userData.firstName}!`);
+                window.location.href = "index.html";
+            }
+        }
+
+        // 解析JWT令牌的辅助函数
+        function parseJwt(token) {
+            try {
+                return JSON.parse(atob(token.split('.')[1]));
+            } catch (e) {
+                return null;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

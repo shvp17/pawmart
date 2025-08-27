@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Care Resources - PawMart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="login_cart.js"></script>
+    <style>
+        /* Pet Care Page Styles */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url(images/petcare.jpg) no-repeat center top/cover;
+            color: var(--light-orange);
+            padding: 100px 0 60px;
+            text-align: center;
+            background-position: center 60%;
+        }
+
+        .pet-care-section {
+            padding: 80px 0;
+        }
+
+        body.dark-mode .pet-care-section-list {
+    background-color: #222121 !important;
+}
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .video-container {
+            box-shadow: 0 10px 30px rgba(220, 211, 211, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .care-category {
+            margin-bottom: 50px;
+        }
+
+        .care-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .care-card {
+            background-color: #414141;
+        }
+
+        .care-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .care-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .resource-list li {
+            border-color: #444;
+        }
+
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+
+        .resource-list a {
+            color: var(--brown);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .resource-list a {
+            color: var(--light-orange);
+        }
+
+        .resource-list a:hover {
+            color: var(--primary-orange);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button id="accountLink" class="btn btn-outline-light">
+                            Account
+                        </button>
+                        <ul id="accountDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Pet Care Resources</h1>
+            <p>Expert advice and guides to keep your pets happy and healthy</p>
+        </div>
+    </section>
+
+    <!-- Featured Video Section -->
+    <section class="pet-care-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-4">Essential Pet Care Tips</h2>
+                    <div class="video-container">
+                        <div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
+                    </div>
+                    <p id="videoDescription" class="text-center mb-0">Now playing: Essential Pet Care Tips</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Care Categories -->
+    <section class="pet-care-section-list" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="text-center mb-5">Pet Care Categories</h2>
+
+            <div class="row care-category">
+                <div class="col-lg-6 mb-4">
+                    <div class="care-card">
+                        <div class="care-icon">
+                            <i class="fas fa-dog"></i>
+                        </div>
+                        <h3>Dog Care</h3>
+                        <p>Everything you need to know about keeping your canine companion healthy and happy.</p>
+                        <ul class="resource-list">
+                            <li><a href="#" data-video="gYjnAPtID1w"><i class="fas fa-play-circle me-2"></i>How to Train
+                                    Your Puppy</a></li>
+                            <li><a href="#" data-video="iux2QpivRYA"><i class="fas fa-play-circle me-2"></i>Nutrition
+                                    Guide for Dogs</a></li>
+                            <li><a href="#" data-video="LVmxn4nlfmk"><i class="fas fa-play-circle me-2"></i>Grooming
+                                    Tips & Techniques</a></li>
+                            <li><a href="#" data-video="ljH2cmgKLWQ"><i class="fas fa-play-circle me-2"></i>Common
+                                    Health Issues</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="care-card">
+                        <div class="care-icon">
+                            <i class="fas fa-cat"></i>
+                        </div>
+                        <h3>Cat Care</h3>
+                        <p>Essential information for feline friends, from kitten care to senior cat health.</p>
+                        <ul class="resource-list">
+                            <li><a href="#" data-video="szulDOcNtFg"><i class="fas fa-play-circle me-2"></i>Litter Box
+                                    Training</a></li>
+                            <li><a href="#" data-video="XYT2zRAs2AY"><i class="fas fa-play-circle me-2"></i>Indoor vs
+                                    Outdoor Cats</a></li>
+                            <li><a href="#" data-video="WzuhuaeS0aQ"><i
+                                        class="fas fa-play-circle me-2"></i>Understanding
+                                    Cat Behavior</a></li>
+                            <li><a href="#" data-video="6cvxA1CMbMQ"><i class="fas fa-play-circle me-2"></i>Feline
+                                    Nutrition Guide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row care-category">
+                <div class="col-lg-6 mb-4">
+                    <div class="care-card">
+                        <div class="care-icon">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <h3>Bird & Fish Care</h3>
+                        <p>Specialized care for your avian and aquatic pets to ensure their wellbeing.</p>
+                        <ul class="resource-list">
+                            <li><a href="#" data-video="qwN9fN8bEHI"><i class="fas fa-play-circle me-2"></i>Setting Up
+                                    an
+                                    Aquarium</a></li>
+                            <li><a href="#" data-video="MJSResE5sMI"><i class="fas fa-play-circle me-2"></i>Bird Cage
+                                    Requirements</a></li>
+                            <li><a href="#" data-video="OAK7u77qGA0"><i class="fas fa-play-circle me-2"></i>Water
+                                    Quality
+                                    Management</a></li>
+                            <li><a href="#" data-video="msLnfGhZV4w"><i class="fas fa-play-circle me-2"></i>Avian
+                                    Nutrition Guide</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="care-card">
+                        <div class="care-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h3>Small Pet Care</h3>
+                        <p>Guidance for rabbits, hamsters, guinea pigs, and other small pets.</p>
+                        <ul class="resource-list">
+                            <li><a href="#" data-video="_yozK-jeB04"><i class="fas fa-play-circle me-2"></i>Habitat
+                                    Setup
+                                    for Small Pets</a></li>
+                            <li><a href="#" data-video="32-0C1ZQ-sA"><i class="fas fa-play-circle me-2"></i>Nutrition
+                                    for
+                                    Rodents</a></li>
+                            <li><a href="#" data-video="XJAMVxLmbdE"><i class="fas fa-play-circle me-2"></i>Handling
+                                    Small
+                                    Pets Safely</a></li>
+                            <li><a href="#" data-video="Z3wqPpMvwLU"><i class="fas fa-play-circle me-2"></i>Common
+                                    Health
+                                    Concerns</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved pets
+                        across Malaysia.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+                    <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+                    <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // --- YouTube IFrame API initialization ---
+        let player; // Global player instance
+        const DEFAULT_VIDEO_ID = "Z4lCObk-OPY"; // Default video
+
+        // IFrame API callback
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                videoId: DEFAULT_VIDEO_ID,
+                playerVars: {
+                    rel: 0,              // Do not show related videos
+                    modestbranding: 1,   // Reduce YouTube branding
+                    playsinline: 1       // iOS inline playback
+                },
+                events: {
+                    onReady: onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady() {
+            // player.mute();
+            // player.playVideo();
+        }
+
+        // Safe function: Ensure player is ready before executing callback
+        function withPlayerReady(fn) {
+            if (player && typeof player.loadVideoById === "function") {
+                fn();
+            } else {
+                const t = setInterval(() => {
+                    if (player && typeof player.loadVideoById === "function") {
+                        clearInterval(t);
+                        fn();
+                    }
+                }, 100);
+            }
+        }
+
+        // Bind click event for video links in the category list to switch videos
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoDescription = document.getElementById("videoDescription");
+            const videoLinks = document.querySelectorAll(".resource-list a[data-video]");
+            let activeLink = null;
+
+            videoLinks.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    const videoId = this.getAttribute("data-video");
+                    const videoTitle = this.textContent?.trim() || "Pet Care Video";
+
+                    if (videoId) {
+                        withPlayerReady(() => {
+                            player.loadVideoById(videoId);
+                        });
+
+                        // Update description
+                        if (videoDescription) {
+                            videoDescription.textContent = "Now playing: " + videoTitle;
+                        }
+
+                        // Handle active styles
+                        if (activeLink) activeLink.classList.remove("active");
+                        this.classList.add("active");
+                        activeLink = this;
+
+                        document.getElementById("yt-player").scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }
+                });
+            });
+
+            // After the page loads, highlight and load the first video by default 
+            if (videoLinks.length > 0) {
+                videoLinks[0].click();
+            }
+        });
+
+                // Dark mode toggle (page fallback)
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+                sessionStorage.setItem('darkMode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                sessionStorage.setItem('darkMode', 'false');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawMart - Fish & Birds</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="petmart_css.css">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="login_cart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/css/social-share-kit.css">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button id="accountLink" class="btn btn-outline-light">
+                            Account
+                        </button>
+                        <ul id="accountDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Slideshow with Text -->
+    <section class="hero">
+        <img src="images/bfshow1.jpeg" class="active" alt="Fish & bird 1">
+        <img src="images/bfshow2.jpeg" alt="Fish & bird Image 2">
+        <img src="images/bfshow3.jpeg" alt="Fish & bird Image 3">
+        <img src="images/bfshow4.jpeg" alt="Fish & bird Image 4">
+        <img src="images/bfshow5.jpeg" alt="Fish & bird Image 5">
+        <img src="images/bfshow6.jpeg" alt="Fish & bird Image 6">
+
+        <!-- Text Overlay -->
+
+        <div class="hero-text">
+            <h1>Fish & Bird Supplies</h1>
+            <p class="lead">Everything for your finned & feathered friends 🐠🐦</p>
+            <a href="#product-list" class="btn btn-custom">Shop Now</a>
+        </div>
+
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="filter">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="food">Food</button>
+        <button class="filter-btn" data-category="cages">Cages</button>
+        <button class="filter-btn" data-category="tanks">Tanks</button>
+        <button class="filter-btn" data-category="toys">Toys</button>
+        <button class="filter-btn" data-category="accessories">Accessories</button>
+    </div>
+
+    <!-- Product List -->
+    <div class="products" id="product-list"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved
+                        pets.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link active">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+                    <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+                    <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/js/social-share-kit.min.js"></script>
+
+    <script>
+        //  const fishBirdProducts = [
+        //             // Food
+        //             { id: 28, name: "Fish Food Flakes 100ml", category: "food", price: 9, img: "images/fb1.jpeg" },
+        //             { id: 29, name: "Color Enhancing Fish Food 260g", category: "food", price: 12, img: "images/fb2.jpeg" },
+        //             { id: 30, name: "Takara Fish Pellets 200g", category: "food", price: 4.50, img: "images/fb3.jpeg" },
+        //             { id: 31, name: "Cuttlefish Bone for Birds 250g", category: "food", price: 30, img: "images/fb4.jpeg" },
+        //             { id: 32, name: "Bird Seed Mix 1kg", category: "food", price: 6, img: "images/fb5.jpeg" },
+
+        //             // Cages
+        //             { id: 33, name: "Bird Cage", category: "cages", price: 70, img: "images/fb6.jpeg" },
+        //             { id: 34, name: "Large Bird Cage with Stand", category: "cages", price: 105, img: "images/fb7.jpeg" },
+        //             { id: 35, name: "Travel Cage for Birds", category: "cages", price: 28, img: "images/fb8.jpeg" },
+        //             { id: 36, name: "Sloid Wood Bird Cage", category: "cages", price: 140, img: "images/fb9.jpeg" },
+
+        //             // Tanks
+        //             { id: 37, name: "Large Aquarium Tank", category: "tanks", price: 87, img: "images/fb10.jpeg" },
+        //             { id: 38, name: "Small Aquarium Tank", category: "tanks", price: 7, img: "images/fb11.jpeg" },
+        //             { id: 39, name: "Aquarium Starter Kit", category: "tanks", price: 67, img: "images/fb12.jpeg" },
+        //             { id: 40, name: "Nano Aquarium Tank", category: "tanks", price: 50, img: "images/fb13.jpeg" },
+
+        //             // Toys
+        //             { id: 41, name: "Bird Toys Set", category: "toys", price: 17.90, img: "images/fb14.jpeg" },
+        //             { id: 42, name: "Hanging Bird Swing", category: "toys", price: 12, img: "images/fb15.jpeg" },
+        //             { id: 43, name: "Chewable Bird Toy Pack", category: "toys", price: 13, img: "images/fb16.jpeg" },
+        //             { id: 44, name: "Colorful Climbing Rope", category: "toys", price: 12, img: "images/fb17.jpeg" },
+
+        //             // Accessories
+        //             { id: 45, name: "Aquarium Decoration", category: "accessories", price: 12, img: "images/fb18.jpeg" },
+        //             { id: 46, name: "Bird Perch", category: "accessories", price: 10, img: "images/fb19.jpeg" },
+        //             { id: 47, name: "Automatic Fish Feeder", category: "accessories", price: 17, img: "images/fb20.jpeg" },
+        //             { id: 48, name: "Aquarium Water Filter", category: "accessories", price: 8.60, img: "images/fb21.jpeg" },
+        //             { id: 49, name: "Bird Bath Bowl", category: "accessories", price: 6, img: "images/fb22.jpeg" },
+        //             { id: 50, name: "Aquarium Air Pump", category: "accessories", price: 9, img: "images/fb23.jpeg" },
+        //             { id: 51, name: "Bird Feeding Bowl", category: "accessories", price: 18, img: "images/fb24.jpeg" },
+        //             { id: 52, name: "Aquarium LED Lighting 28cm (white)", category: "accessories", price: 7.20, img: "images/fb25.jpeg" }
+        //         ];
+
+
+        //         function displayProducts(filter) {
+        //             $("#product-list").empty();
+        //             const filtered = filter === "all" ? fishBirdProducts : fishBirdProducts.filter(p => p.category === filter);
+        //             $.each(filtered, function (_, product) {
+        //                 const card = `
+        //           <div class="card show">
+        //             <img src="${product.img}" alt="${product.name}">
+        //             <h3>${product.name}</h3>
+        //             <p>RM ${product.price.toFixed(2)}</p>
+        //              <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">Add to Cart</button>
+        //           </div>`;
+        //                 $("#product-list").append(card);
+        //             });
+        //         }
+
+        function displayProducts(filter) {
+            $("#product-list").empty();
+
+            let url = "https://68ae0f7aa0b85b2f2cf57702.mockapi.io/api/pawmart/fishBirdProducts";
+            if (filter !== "all") {
+                url += `?category=${filter}`;
+            }
+
+           $.get(url, function (data) {
+    $.each(data, function (_, product) {
+        const productUrl = window.location.href;
+        const productTitle = product.name + ' - PawMart';
+        const whatsappText = encodeURIComponent(`Check out ${product.name} at PawMart: ${window.location.href}`);
+        
+        const card = `
+        <div class="card show">
+          <img src="${product.img}" alt="${product.name}">
+          <h5>${product.name}</h5>
+          <p>RM ${product.price.toFixed(2)}</p>
+          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">
+            Add to Cart
+          </button>
+          <div class="ssk-group ssk-sm ssk-center" 
+               data-url="${productUrl}"
+               data-title="${productTitle}">
+            <a href="#" class="ssk ssk-facebook"></a>
+            <a href="#" class="ssk ssk-twitter"></a>
+            <a href="https://api.whatsapp.com/send?text=${whatsappText}" 
+               class="ssk ssk-whatsapp"></a>
+            <a href="#" class="ssk ssk-email"></a>
+          </div>
+        </div>`;
+        $("#product-list").append(card);
+    });
+                if (typeof SocialShareKit !== 'undefined') {
+                    SocialShareKit.init();
+                }
+            });
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+                sessionStorage.setItem('darkMode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                sessionStorage.setItem('darkMode', 'false');
+            }
+
+            console.log('Dark mode toggled:', isDarkMode);
+        }
+
+        $(document).ready(function () {
+            displayProducts("all");
+
+            $(".filter-btn").on("click", function () {
+                $(".filter-btn").removeClass("active");
+                $(this).addClass("active");
+                displayProducts($(this).data("category"));
+            });
+        });
+
+        // Hero Slideshow
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".hero img");
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+                if (i === index) {
+                    slide.classList.add("active");
+                }
+            });
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, 5000); // 5 seconds
+    </script>
+</body>
+
+</html>

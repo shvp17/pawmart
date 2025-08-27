@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - PawMart - Pet Supplies & Treats</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="login_cart.js"></script>
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(135deg, var(--primary-orange) 0%, var(--light-orange) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-position: center 25%; 
+            background-size: cover;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--pale-orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .form-container {
+            background: #2a2a2a;
+            border: 2px solid #444;
+            color: #ccc;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h2 {
+            color: var(--brown);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .form-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+            border-radius: 2px;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border: 2px solid var(--pale-orange);
+            border-radius: 15px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 0.2rem rgba(240, 151, 80, 0.25);
+            background-color: white;
+        }
+
+        .form-control.message-box {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #3a3a3a;
+            color: #ccc;
+            border: 2px solid #555;
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .send-button {
+            background: linear-gradient(45deg, var(--primary-orange), var(--light-orange));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(240, 151, 80, 0.3);
+        }
+
+        .send-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(240, 151, 80, 0.4);
+        }
+
+        .send-button:active {
+            transform: translateY(-1px);
+        }
+
+        .send-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+            pointer-events: none;
+        }
+
+        .send-button:hover::before {
+            left: 100%;
+        }
+
+        /* Contact Info Cards */
+        .contact-info {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid var(--pale-orange);
+            margin-bottom: 2rem;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card h4 {
+            color: var(--brown);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: #666;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--brown);
+        }
+
+        /* Map Container */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Feedback Messages */
+        .valid-feedback,
+        .invalid-feedback {
+            display: none;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .valid-feedback {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .invalid-feedback {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ====================== Contact Section from index.html ====================== */
+        .contact-section-index {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        body.dark-mode .contact-section-index {
+            background-color: #2a2a2a;
+        }
+
+        .contact-section-index h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--brown);
+            margin-bottom: 3rem;
+        }
+
+        .contact-section-index .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .contact-section-index .card {
+            background: rgb(56, 55, 55);
+            border: 1px solid white;
+            color: white;
+        }
+
+        .contact-section-index .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-section-index .card-body {
+            padding: 2rem;
+        }
+
+        .contact-section-index i {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section-index h4 {
+            color: var(--brown);
+            font-weight: bold;
+        }
+
+        .contact-section-index hr {
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-orange);
+            opacity: 1;
+        }
+
+        body.dark-mode .contact-section-index small.text-black-50 {
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 2rem;
+                margin: 0 15px;
+            }
+
+            .contact-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button id="accountLink" class="btn btn-outline-light">
+                            Account
+                        </button>
+                        <ul id="accountDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Get in touch with our pet care experts</p>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <div style="font-size: 3rem; color: var(--primary-orange); margin-bottom: 1rem;">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <h2>Get In Touch</h2>
+                            <p>You are more than welcome to send us a message to express your thoughts!</p>
+                        </div>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Full Name"
+                                    required />
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" id="phone" class="form-control"
+                                    placeholder="Phone Number" pattern="[0-9]{10}" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" class="form-control"
+                                    placeholder="Email Address" required />
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" id="message" class="form-control message-box"
+                                    placeholder="Your Message" required></textarea>
+                            </div>
+
+                            <!-- Feedback Messages -->
+                            <div class="valid-feedback" id="success-message">
+                                Thank you for reaching out to us! Your message has been sent successfully.
+                            </div>
+                            <div class="invalid-feedback" id="error-message"></div>
+
+                            <!-- Send Button -->
+                            <button type="submit" class="send-button w-100">
+                                <i class="fas fa-paper-plane me-2"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.7203491976793!2d101.6866!3d3.1319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49c701efeae7%3A0xf4d98e5b2f1c287d!2sKuala%20Lumpur%2C%20Malaysia!5e0!3m2!1sen!2smy!4v1699999999999!5m2!1sen!2smy"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== Contact Section from index.html ====================== -->
+    <section class="contact-section-index">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-black mb-5">Reach Out To Us</h2>
+            <div class="row gx-4 gx-lg-5">
+                <!-- Address -->
+                <div class="col-md-4 mb-3 mb-md-0 contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked-alt mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-50">Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="col-md-4 mb-3 mb-md-0 contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black">
+                                <a href="mailto:info@pawmart.com">info@pawmart.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Phone Number -->
+                <div class="col-md-4 mb-3 mb-md-0 whatsapp-contact">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fa-brands fa-whatsapp mb-2 fa-2x"></i>
+                            <h4 class="text-uppercase m-0">Whatsapp Us</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-50">+60 4-733 8800</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved
+                        pets.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+                sessionStorage.setItem('darkMode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                sessionStorage.setItem('darkMode', 'false');
+            }
+
+
+        }
+
+        // // Cart Functions (using memory storage)
+        // let cartCount = 0;
+
+        // function toggleCart() {
+        //     alert('Cart functionality would be implemented here');
+        // }
+
+        // function updateCartDisplay() {
+        //     document.getElementById('cartCount').textContent = cartCount;
+        // }
+
+        // Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form data
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Simple form validation
+            if (!name || !phone || !email || !message) {
+                showError('Please fill in all fields.');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            if (!isValidPhone(phone)) {
+                showError('Please enter a valid phone number.');
+                return;
+            }
+
+            // Simulate form submission
+            simulateFormSubmission(name, phone, email, message);
+        });
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[0-9]{10,}$/;
+            return phoneRegex.test(phone.replace(/\D/g, ''));
+        }
+
+        function simulateFormSubmission(name, phone, email, message) {
+            // Show loading state
+            const submitButton = document.querySelector('.send-button');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+            submitButton.disabled = true;
+
+            // Simulate API call delay
+            setTimeout(() => {
+                // Store form submission in memory
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Store in window object for demo purposes
+                if (!window.contactSubmissions) {
+                    window.contactSubmissions = [];
+                }
+                window.contactSubmissions.push(formData);
+
+                // Reset form
+                document.getElementById('contact-form').reset();
+
+                // Show success message
+                showSuccess();
+
+                // Reset button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+
+                console.log('Form submitted:', formData);
+            }, 2000);
+        }
+
+        function showSuccess() {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'block';
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(message) {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            successMsg.style.display = 'none';
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                errorMsg.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Apply any saved dark mode preference (from memory)
+            if (window.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.dark-mode-toggle i').className = 'fas fa-sun';
+            }
+
+            console.log('PawMart Contact Page Loaded');
+        });
+    </script>
+</body>
+
+</html>

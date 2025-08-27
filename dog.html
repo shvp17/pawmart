@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PawMart - Dogs</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="pawmart.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/css/social-share-kit.css">
+  <script src="login_cart.js"></script>
+  <style>
+    /* Hero Slideshow */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hero img.active {
+      opacity: 1;
+    }
+
+    /* Filter Buttons */
+    .filter {
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 25px;
+      background: #935A40;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background: #FAD4BF;
+      transform: scale(1.05);
+    }
+
+    .filter-btn.active {
+      background: #F09750;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background: rgba(224, 221, 221, 0.4);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.3s ease;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .card h3 {
+      min-height: 5px;
+      /* makes space for titles */
+    }
+
+    .card img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .card.show button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #935A40;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card.show button:hover {
+      background: #C98568;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <small>Free Shipping on Orders Above RM100</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center">
+          <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+          </button>
+
+          <div class="position-relative me-3">
+            <button class="btn btn-outline-light" onclick="toggleCart()">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-badge" id="cartCount">0</span>
+            </button>
+          </div>
+
+          <div class="dropdown">
+            <button id="accountLink" class="btn btn-outline-light">
+              Account
+            </button>
+            <ul id="accountDropdown" class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Slideshow -->
+  <section class="hero">
+    <img src="images/dogshow.jpg" class="active" alt="Dog Image 1">
+    <img src="images/dogshow1.jpg" alt="Dog Image 2">
+    <img src="images/dogshow2.jpg" alt="Dog Image 3">
+    <img src="images/dogshow3.jpg" alt="Dog Image 4">
+  </section>
+
+  <!-- Filter Buttons -->
+  <div class="filter">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="food">Food</button>
+    <button class="filter-btn" data-category="toys">Toys</button>
+    <button class="filter-btn" data-category="grooming">Grooming</button>
+    <button class="filter-btn" data-category="accessories">Accessories</button>
+
+  </div>
+
+  <!-- Product List -->
+  <div class="products" id="product-list"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 footer-section">
+          <h5 class="footer-title">PawMart</h5>
+          <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved pets across
+            Malaysia.</p>
+          <div class="social-links">
+            <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3 footer-section">
+          <h5 class="footer-title">Quick Links</h5>
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About Us</a>
+          <a href="dog.html" class="footer-link">Products</a>
+          <a href="petcare.html" class="footer-link">Pet Care</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="col-md-3 footer-section">
+          <h5 class="footer-title">Categories</h5>
+          <a href="dog.html" class="footer-link">Dog Supplies</a>
+          <a href="cat.html" class="footer-link">Cat Supplies</a>
+          <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+          <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+        </div>
+        <div class="col-md-3 footer-section">
+          <h5 class="footer-title">Contact Info</h5>
+          <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+          <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+          <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+        </div>
+      </div>
+      <hr style="border-color: #444; margin: 2rem 0;">
+      <div class="text-center">
+        <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+            style="color: var(--light-orange);"></i> for pets</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/js/social-share-kit.min.js"></script>
+
+  <script>
+    //     const dogProducts = [
+    //        { id: 1, name: "Chicken Recipe for Dogs", category: "food", price: 35, img: "images/dog1.jpg" },
+    //   { id: 2, name: "Duck Recipe for Dogs", category: "food", price: 35, img: "images/dog2.jpg" },
+    //   { id: 3, name: "Fish Recipe for Dogs", category: "food", price: 35, img: "images/dog3.jpg" }, 
+    //   { id: 4, name: "Beef Recipe for Dogs", category: "food", price: 35, img: "images/dog4.jpg" },
+    //   { id: 5, name: "Chicken Liver", category: "food", price: 45, img: "images/dog5.jpg" },
+    //   { id: 6, name: "Duck Liver", category: "food", price: 45, img: "images/dog6.jpg" },
+    //   { id: 7, name: "Beef Liver", category: "food", price: 45, img: "images/dog7.jpg" },
+    //   { id: 8, name: "Chicken Gizzards", category: "food", price: 50, img: "images/dog8.jpg" },
+    //   { id: 9, name: "Beef Nuggets", category: "food", price: 50, img: "images/dog9.jpg" },
+
+    //   { id: 10, name: "Interactive Dog Toy With Large Ring And Ball In Blue", category: "toys", price: 15, img: "images/dog10.jpg" },
+    //   { id: 11, name: "Interactive Dog Toy With Large Ring And Ball In Pink", category: "toys", price: 15, img: "images/dog11.jpg" },
+    //   { id: 12, name: "Interactive Dog Toy With Large Ring And Ball In Green", category: "toys", price: 15, img: "images/dog12.jpg" },
+    //   { id: 13, name: "Donut Dog Chew Toys", category: "toys", price: 12, img: "images/dog13.jpg" },
+    //   { id: 14, name: "Coffee Wood Dog Toy", category: "toys", price: 10, img: "images/dog14.jpg" },
+
+    //   { id: 15, name: "Dog All Purpose Trimming Scissor", category: "grooming", price: 18, img: "images/dog15.jpg" },
+    //   { id: 16, name: "Dog Bristle Brush", category: "grooming", price: 25, img: "images/dog16.jpg" },
+    //   { id: 17, name: "Dog Combo Brush", category: "grooming", price: 25, img: "images/dog17.jpg" },
+    //   { id: 18, name: "Dog Deshedder Undercoat Rake Combo", category: "grooming", price: 25, img: "images/dog18.jpg" },
+    //   { id: 19, name: "Dog Flea Comb", category: "grooming", price: 25, img: "images/dog19.jpg" },
+    //   { id: 20, name: "Dog Nail Clipper", category: "grooming", price: 15, img: "images/dog20.jpg" },
+    //   { id: 21, name: "Dog Nail Trimmer", category: "grooming", price: 15, img: "images/dog21.jpg" },
+    //   { id: 22, name: "Grooming Shield", category: "grooming", price: 8, img: "images/dog22.jpg" },
+
+    //   { id: 23, name: "Dogit 2in1 Durable Bowl White 350ml", category: "accessories", price: 28, img: "images/dog23.jpg" },
+    //   { id: 24, name: "Dogit 2in1 Durable Bowl Black 350ml", category: "accessories", price: 28, img: "images/dog24.jpg" },
+    //   { id: 25, name: "Dog Adjustable Collar Black 36cm", category: "accessories", price: 10, img: "images/dog25.jpg" },
+    //   { id: 26, name: "Dog Adjustable Collar Tangerine 36cm", category: "accessories", price: 10, img: "images/dog26.jpg" },
+    //   { id: 27, name: "Dog Adjustable Collar Purple 36cm", category: "accessories", price: 10, img: "images/dog27.jpg" },
+    // ];
+
+
+
+    // function displayProducts(filter) {
+    //   $("#product-list").empty();
+    //   const filtered = filter === "all" ? dogProducts : dogProducts.filter(p => p.category === filter);
+    //   $.each(filtered, function(_, product) {
+    //     const card = `
+    //       <div class="card show">
+    //         <img src="${product.img}" alt="${product.name}">
+    //         <h5>${product.name}</h5>
+    //         <p>RM ${product.price.toFixed(2)}</p>
+    //         <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">Add to Cart</button>
+    //       </div>`;
+    //     $("#product-list").append(card);
+    //   });
+    // }
+
+    function displayProducts(filter) {
+      $("#product-list").empty();
+
+      let url = "https://68ae0b2ca0b85b2f2cf56a6e.mockapi.io/api/pawmart/dogProducts";
+      if (filter !== "all") {
+        url += `?category=${filter}`;
+      }
+
+     $.get(url, function (data) {
+    $.each(data, function (_, product) {
+        const productUrl = window.location.href;
+        const productTitle = product.name + ' - PawMart';
+        const whatsappText = encodeURIComponent(`Check out ${product.name} at PawMart: ${window.location.href}`);
+        
+        const card = `
+        <div class="card show">
+          <img src="${product.img}" alt="${product.name}">
+          <h5>${product.name}</h5>
+          <p>RM ${product.price.toFixed(2)}</p>
+          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">
+            Add to Cart
+          </button>
+          <div class="ssk-group ssk-sm ssk-center" 
+               data-url="${productUrl}"
+               data-title="${productTitle}">
+            <a href="#" class="ssk ssk-facebook"></a>
+            <a href="#" class="ssk ssk-twitter"></a>
+            <a href="https://api.whatsapp.com/send?text=${whatsappText}" 
+               class="ssk ssk-whatsapp"></a>
+            <a href="#" class="ssk ssk-email"></a>
+          </div>
+        </div>`;
+        $("#product-list").append(card);
+    });
+        if (typeof SocialShareKit !== 'undefined') {
+          SocialShareKit.init();
+        }
+      });
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const body = document.body;
+      const icon = document.querySelector('.dark-mode-toggle i');
+
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+
+      if (isDarkMode) {
+        icon.className = 'fas fa-sun';
+        sessionStorage.setItem('darkMode', 'true');
+      } else {
+        icon.className = 'fas fa-moon';
+        sessionStorage.setItem('darkMode', 'false');
+      }
+
+      console.log('Dark mode toggled:', isDarkMode);
+    }
+
+    $(document).ready(function () {
+      displayProducts("all");
+
+      // Filter button click
+      $(".filter-btn").on("click", function () {
+        $(".filter-btn").removeClass("active");
+        $(this).addClass("active");
+        displayProducts($(this).data("category"));
+      });
+    });
+
+    // Hero Slideshow
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".hero img");
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }, 5000); // 5 seconds
+  </script>
+
+</body>
+
+</html>

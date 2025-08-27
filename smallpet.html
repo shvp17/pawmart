@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawMart - Fish & Birds</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="petmart_css.css">
+    <link rel="stylesheet" href="pawmart.css">
+    <script src="login_cart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/css/social-share-kit.css">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <small>Free Shipping on Orders Above RM100</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-paw"></i> PawMart</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dog.html"><i class="fas fa-dog"></i> Dog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cat.html"><i class="fas fa-cat"></i> Cat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fishnbird.html"><i class="fas fa-dove"></i> Fish & Bird</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="smallpet.html"><i class="fas fa-paw"></i> Small Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html"><i class="fas fa-check-square"></i> Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle me-3" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="position-relative me-3">
+                        <button class="btn btn-outline-light" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button id="accountLink" class="btn btn-outline-light">
+                            Account
+                        </button>
+                        <ul id="accountDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Slideshow with Text -->
+    <section class="hero">
+        <img src="images/smallpet1.jpeg" class="active" alt="Small Pet Image 1">
+        <img src="images/smallpet2.jpeg" alt="Small Pet Image 2">
+        <img src="images/smallpet3.jpeg" alt="Small Pet Image 3">
+        <img src="images/smallpet4.jpeg" alt="Small Pet Image 4">
+        <img src="images/smallpet5.jpeg" alt="Small Pet Image 5">
+        <img src="images/smallpet6.jpeg" alt="Small Pet Image 6">
+
+        <!-- Text Overlay -->
+        <div class="hero-text">
+            <h1>Small Pet Supplies</h1>
+            <p class="lead">Everything your little friends need 🐹🐰🐢</p>
+            <a href="#product-list" class="btn btn-custom">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="filter">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="food">Food</button>
+        <button class="filter-btn" data-category="toys">Toys</button>
+        <button class="filter-btn" data-category="cages">Cages</button>
+        <button class="filter-btn" data-category="bedding">Bedding</button>
+        <button class="filter-btn" data-category="accessories">Accessories</button>
+    </div>
+
+    <!-- Product List -->
+    <div class="products" id="product-list"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">PawMart</h5>
+                    <p>Your trusted partner in pet care, providing quality supplies and treats for all your beloved pets
+                        across Malaysia.</p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-link me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="dog.html" class="footer-link">Products</a>
+                    <a href="petcare.html" class="footer-link">Pet Care</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Categories</h5>
+                    <a href="dog.html" class="footer-link">Dog Supplies</a>
+                    <a href="cat.html" class="footer-link">Cat Supplies</a>
+                    <a href="fishnbird.html" class="footer-link">Fish & Bird</a>
+                    <a href="smallpet.html" class="footer-link">Small Pets Supplies</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Lot 215, Pantai Baru, Jalan Bangsar, 59200 Kuala Lumpur</p>
+                    <p><i class="fas fa-phone"></i> +60 4-733 8800</p>
+                    <p><i class="fas fa-envelope"></i> info@pawmart.com</p>
+                </div>
+            </div>
+            <hr style="border-color: #444; margin: 2rem 0;">
+            <div class="text-center">
+                <p>&copy; 2025 PawMart. All rights reserved. | Made with <i class="fas fa-heart"
+                        style="color: var(--light-orange);"></i> for pets</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/social-share-kit@1.0.9/dist/js/social-share-kit.min.js"></script>
+
+    <script>
+        // const smallPetProducts = [
+        //     { id: 82, name: "Hamster Food Mix", category: "food", price: 8.99, img: "images/s1.jpeg" },
+        //     { id: 83, name: "Rabbit Food Pellets", category: "food", price: 30, img: "images/s2.jpeg" },
+        //     { id: 84, name: "Turtle Food Sticks", category: "food", price: 20, img: "images/s3.jpeg" },
+        //     { id: 85, name: "Premium Alfalfa Hay 2kg", category: "food", price: 15, img: "images/s4.jpeg" },
+        //     { id: 86, name: "Premium Timothy Hay 2kg", category: "food", price: 16, img: "images/s5.jpeg" },
+        //     { id: 87, name: "Hamster Sunflower Seeds 350g", category: "food", price: 5.99, img: "images/s6.jpeg" },
+        //     { id: 88, name: "Guinea Pig Vitamin C 60pcs", category: "food", price: 31, img: "images/s7.jpeg" },
+        //     { id: 89, name: "Chinchilla Veggies Treats 200g", category: "food", price: 9, img: "images/s8.jpeg" },
+        //     { id: 90, name: "Hamster Mix Grain 900g", category: "food", price: 15, img: "images/s9.jpeg" },
+        //     { id: 91, name: "Timothy Grass Pellets 500g", category: "food", price: 9, img: "images/s10.jpeg" },
+        //     { id: 92, name: "Vitamin C Syrup for Guinuea Pig 100ml", category: "food", price: 18.80, img: "images/s11.jpeg" },
+        //     { id: 93, name: "Chinchilla Fruit Treats 180g", category: "food", price: 10, img: "images/s12.jpeg" },
+        //     { id: 94, name: "Apple Branch Chew Sticks for Chinchilla 100g", category: "food", price: 2.50, img: "images/s13.jpeg" },
+        //     { id: 95, name: "Mealworms Dried 200g", category: "food", price: 8, img: "images/s14.jpeg" },
+        //     { id: 96, name: "Timothy Hay Cubes 200g", category: "food", price: 9, img: "images/s15.jpeg" },
+        //     { id: 97, name: "Dandelion grass hay 20g", category: "food", price: 4.50, img: "images/s16.jpeg" },
+        //     { id: 98, name: "Guinea Pig Food 1kg", category: "food", price: 4.50, img: "images/s17.jpeg" },
+
+        //     { id: 99, name: "Hamster Running Wheel", category: "toys", price: 18.90, img: "images/s18.jpeg" },
+        //     { id: 100, name: "Ball Corn Leaf Chew Rabbit Toy", category: "toys", price: 4.20, img: "images/s19.jpeg" },
+        //     { id: 101, name: "Wooden Chew Sticks Pack of 100g", category: "toys", price: 10, img: "images/s13.jpeg" },
+        //     { id: 102, name: "Hamster Tunnel Tube Set (white)", category: "toys", price: 19, img: "images/s21.jpeg" },
+        //     { id: 103, name: "Hamster Tunnel Tube Set (pink)", category: "toys", price: 19, img: "images/s22.jpeg" },
+        //     { id: 104, name: "Hamster Tunnel Tube Set (blue)", category: "toys", price: 19, img: "images/s23.jpeg" },
+        //     { id: 105, name: "Rabbit Play Ball with Bell 5.5cm", category: "toys", price: 2, img: "images/s24.jpeg" },
+        //     { id: 106, name: "Molar Grass Sticks Pack of 25", category: "toys", price: 6.60, img: "images/s25.jpeg" },
+        //     { id: 107, name: "Hamster Running Ball 12cm", category: "toys", price: 15, img: "images/s26.jpeg" },
+        //     { id: 108, name: "Hamster Running Ball 14cm", category: "toys", price: 20, img: "images/s27.jpeg" },
+
+        //     { id: 109, name: "Hamster Cage", category: "cages", price: 65, img: "images/s28.png" },
+        //     { id: 110, name: "Rabbit Hutch", category: "cages", price: 104, img: "images/s29.jpeg" },
+        //     { id: 111, name: "Acrylic Hamster Cage with Tunnel (2 layer)", category: "cages", price: 69, img: "images/s30.jpeg" },
+        //     { id: 112, name: "Multi-level Hamster House (3 layer)", category: "cages", price: 120, img: "images/s31.jpeg" },
+        //     { id: 113, name: "Rabbit Indoor Playpen (Foldable)", category: "cages", price: 23, img: "images/s32.jpeg" },
+        //     { id: 114, name: "Hamster Wooden Hideout House", category: "cages", price: 12, img: "images/s33.jpeg" },
+        //     { id: 115, name: "Turtle Tank", category: "cages", price: 300, img: "images/s34.jpeg" },
+        //     { id: 116, name: "Turtle Tank Set", category: "cages", price: 75, img: "images/s35.jpeg" },
+        //     { id: 117, name: "Paper Bedding 450g", category: "bedding", price: 13.50, img: "images/s36.jpeg" },
+        //     { id: 118, name: "Small Pet Bath Sand 1kg (Lavender)", category: "bedding", price: 6.90, img: "images/s37.jpeg" },
+        //     { id: 119, name: "Cage Cleaner Spray (peach) 500ml", category: "bedding", price: 16, img: "images/s38.jpeg" },
+        //     { id: 120, name: "Wood Bedding 3.2kg", category: "bedding", price: 25, img: "images/s39.jpeg" },
+
+        //     { id: 121, name: "Hamster Cage Starter Kit", category: "accessories", price: 25, img: "images/s40.jpeg" },
+        //     { id: 122, name: "Small Pet Travel Carrier", category: "accessories", price: 12.90, img: "images/s41.jpeg" },
+        //     { id: 123, name: "Small Pet Water Bottle 250ml", category: "accessories", price: 6, img: "images/s42.jpeg" },
+        //     { id: 124, name: "Small Pet Water Bottle 125ml", category: "accessories", price: 12, img: "images/s43.jpeg" },
+        //     { id: 125, name: "Rabbit Harness & Leash Set (blue)", category: "accessories", price: 9, img: "images/s44.jpeg" },
+        //     { id: 126, name: "Rabbit Harness & Leash Set (white)", category: "accessories", price: 9, img: "images/s45.jpeg" },
+        //     { id: 127, name: "Rabbit Harness & Leash Set (pink)", category: "accessories", price: 9, img: "images/s46.jpeg" },
+        //     { id: 128, name: "Rabbit Harness & Leash Set (green)", category: "accessories", price: 35, img: "images/s47.jpeg" },
+        //     { id: 129, name: "Feeding Bowl Ceramic Non-slip", category: "accessories", price: 7, img: "images/s48.jpeg" },
+        //     { id: 130, name: "Hamster Exercise Wheel 14cm (Plastic)", category: "accessories", price: 9.90, img: "images/s49.jpeg" },
+        //     { id: 131, name: "Hamster Acrylic Running Wheel", category: "accessories", price: 60, img: "images/s18.jpeg" },
+        //     { id: 132, name: "Nail Clipper for Small Pets", category: "accessories", price: 18, img: "images/s51.jpeg" },
+        //     { id: 133, name: "Wooden Chew Platform with Ladder", category: "accessories", price: 10, img: "images/s52.jpeg" }
+
+        // ];
+
+        // function displayProducts(filter) {
+        //     $("#product-list").empty();
+        //     const filtered = filter === "all" ? smallPetProducts : smallPetProducts.filter(p => p.category === filter);
+        //     $.each(filtered, function (_, product) {
+        //         const card = `
+        //   <div class="card show">
+        //     <img src="${product.img}" alt="${product.name}">
+        //     <h3>${product.name}</h3>
+        //     <p>RM ${product.price.toFixed(2)}</p>
+        //      <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">Add to Cart</button>
+        //   </div>`;
+        //         $("#product-list").append(card);
+        //     });
+        // }
+
+        function displayProducts(filter) {
+            $("#product-list").empty();
+
+            let url = "https://68ae0f7aa0b85b2f2cf57702.mockapi.io/api/pawmart/smallPetProducts";
+            if (filter !== "all") {
+                url += `?category=${filter}`;
+            }
+
+$.get(url, function (data) {
+    $.each(data, function (_, product) {
+        const productUrl = window.location.href;
+        const productTitle = product.name + ' - PawMart';
+        const whatsappText = encodeURIComponent(`Check out ${product.name} at PawMart: ${window.location.href}`);
+        
+        const card = `
+        <div class="card show">
+          <img src="${product.img}" alt="${product.name}">
+          <h5>${product.name}</h5>
+          <p>RM ${product.price.toFixed(2)}</p>
+          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.img}')">
+            Add to Cart
+          </button>
+          <div class="ssk-group ssk-sm ssk-center" 
+               data-url="${productUrl}"
+               data-title="${productTitle}">
+            <a href="#" class="ssk ssk-facebook"></a>
+            <a href="#" class="ssk ssk-twitter"></a>
+            <a href="https://api.whatsapp.com/send?text=${whatsappText}" 
+               class="ssk ssk-whatsapp"></a>
+            <a href="#" class="ssk ssk-email"></a>
+          </div>
+        </div>`;
+        $("#product-list").append(card);
+    });
+    
+    if (typeof SocialShareKit !== 'undefined') {
+        SocialShareKit.init();
+    }
+});
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+                sessionStorage.setItem('darkMode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                sessionStorage.setItem('darkMode', 'false');
+            }
+
+            console.log('Dark mode toggled:', isDarkMode);
+        }
+
+
+        $(document).ready(function () {
+            displayProducts("all");
+
+            $(".filter-btn").on("click", function () {
+                $(".filter-btn").removeClass("active");
+                $(this).addClass("active");
+                displayProducts($(this).data("category"));
+            });
+        });
+
+        // Hero Slideshow
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".hero img");
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+                if (i === index) {
+                    slide.classList.add("active");
+                }
+            });
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, 5000); // 5 seconds
+
+    </script>
+
+</body>
+
+</html>

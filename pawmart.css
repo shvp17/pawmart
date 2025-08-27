@@ -1,0 +1,304 @@
+ :root {
+     --primary-orange: #F09750;
+     --light-orange: #FFB578;
+     --pale-orange: #FFE9CD;
+     --coral-pink: #FAD4BF;
+     --orange-gray: #C98568;
+     --brown: #935A40;
+     --light-bg: #ffffff;
+     --light-text: #333333;
+     --dark-bg: #1a1a1a;
+     --dark-text: #f8f9fa;
+     --card-light: #ffffff;
+     --card-dark: #2c2c2c;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     line-height: 1.6;
+     color: var(--light-text);
+     background-color: var(--light-bg);
+     transition: all 0.3s ease;
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+ }
+
+ /* Dark Mode Styles */
+ body.dark-mode {
+     background-color: var(--dark-bg);
+     color: var(--dark-text);
+ }
+
+ body.dark-mode .navbar {
+     background: linear-gradient(90deg, var(--brown), #7a4932) !important;
+ }
+
+ body.dark-mode .card {
+     background-color: var(--card-dark);
+     border-color: #444;
+     color: var(--dark-text);
+ }
+
+ /* Header Styles */
+ .top-bar {
+     background-color: var(--brown);
+     color: white;
+     padding: 8px 0;
+     font-size: 0.85rem;
+ }
+
+ .navbar {
+     background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+     padding: 1rem 0;
+ }
+
+ .navbar-brand {
+     font-size: 1.8rem;
+     font-weight: bold;
+     color: white !important;
+ }
+
+ .navbar-nav .nav-link {
+     color: white !important;
+     margin: 0 15px;
+     font-weight: 500;
+     transition: all 0.3s ease;
+     position: relative;
+ }
+
+ .navbar-nav .nav-link:hover {
+     color: var(--pale-orange) !important;
+     transform: translateY(-2px);
+ }
+
+ .navbar-nav .nav-link::after {
+     content: '';
+     position: absolute;
+     bottom: -5px;
+     left: 0;
+     width: 0;
+     height: 2px;
+     background-color: white;
+     transition: width 0.3s ease;
+ }
+
+ .navbar-nav .nav-link:hover::after {
+     width: 100%;
+ }
+
+ .navbar-nav .nav-link.active {
+     color: var(--pale-orange) !important;
+ }
+
+ /* Utilities */
+ .dark-mode-toggle {
+     background: none;
+     border: none;
+     color: white;
+     font-size: 1.2rem;
+     cursor: pointer;
+     transition: all 0.3s ease;
+ }
+
+ .dark-mode-toggle:hover {
+     color: var(--light-orange);
+     transform: rotate(180deg);
+ }
+
+ .cart-badge {
+     position: absolute;
+     top: -6px;
+     right: -6px;
+     background-color: var(--light-orange);
+     color: white;
+     border-radius: 50%;
+     width: 20px;
+     height: 20px;
+     font-size: 0.7rem;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ /* share icon */
+.share-icon {
+  display: inline-block;
+  margin: 0 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #935A40;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.share-icon:hover {
+  background-color: #F09750;
+  transform: scale(1.1);
+}
+
+.share-icon i {
+  font-size: 14px;
+}
+
+.fa-whatsapp {
+  position: relative;
+  top: -1px;
+}
+
+ /* Footer */
+ .footer {
+     background-color: var(--brown);
+     color: white;
+     padding: 30px 0 15px;
+     margin-top: auto;
+ }
+
+ .footer-section {
+     margin-bottom: 1.5rem;
+ }
+
+ .footer-title {
+     font-size: 1.2rem;
+     font-weight: bold;
+     margin-bottom: 1rem;
+     color: var(--light-orange);
+ }
+
+ .footer-link {
+     color: var(--pale-orange);
+     text-decoration: none;
+     margin-bottom: 0.5rem;
+     display: block;
+     transition: color 0.3s ease;
+ }
+
+ .footer-link:hover {
+     color: var(--light-orange);
+ }
+
+   .ssk-group {
+    margin-top: 10px;
+    padding: 5px 0;
+  }
+  
+  .ssk {
+    background-color: #935A40 !important;
+    border-radius: 50% !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 3px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .ssk:before {
+    color: white !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+  
+  .ssk:hover {
+    background-color: #F09750 !important;
+    transform: scale(1.1) !important;
+  }
+  
+  .ssk-facebook::before {
+  content: "\f39e"; /* Facebook */
+  font-family: "Font Awesome 5 Brands";       
+}
+
+.ssk-twitter::before {
+  content: "\f099"; /* Twitter */
+  font-family: "Font Awesome 5 Brands";
+}
+
+.ssk-whatsapp::before {
+  content: "\f232"; /* WhatsApp */
+  font-family: "Font Awesome 5 Brands";
+}
+
+.ssk-email::before {
+  content: "\f0e0"; /* Email (Envelope) */
+  font-family: "Font Awesome 5 Free";  /* 注意 Email 属于 Free，不是 Brands */
+  font-weight: 900; /* 必须加粗，不然显示不出来 */
+}
+  
+  @media (max-width: 768px) {
+    .ssk {
+      width: 28px !important;
+      height: 28px !important;
+    }
+    
+    .ssk:before {
+      font-size: 12px !important;
+    }
+  }
+
+  /* Pet Care Section Styles */
+.pet-care-section {
+    padding: 80px 0;
+    background-color: white;
+}
+
+body.dark-mode .pet-care-section {
+    background-color: var(--dark-bg);
+}
+
+.pet-care-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .pet-care-card {
+    background-color: var(--card-dark);
+}
+
+/* pet care  */
+.pet-care-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.pet-care-icon {
+    font-size: 3rem;
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+}
+
+.pet-care-card h4 {
+    color: var(--brown);
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+body.dark-mode .pet-care-card h4 {
+    color: var(--light-orange);
+}
+
+.pet-care-card p {
+    color: #666;
+}
+
+body.dark-mode .pet-care-card p {
+    color: #ccc;
+}
