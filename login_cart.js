@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (logoutLink) {
                 logoutLink.onclick = function (e) {
                     e.preventDefault();
-                    // Clear currentUser on logout (comment out the next line if you want to keep the recently logged-in user)
+                    // Clear currentUser on logout
                     localStorage.removeItem("currentUser");
 
                     localStorage.setItem("isLoggedIn", "false");
